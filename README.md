@@ -15,15 +15,15 @@
 В последний раз прошу вас рассмотреть этот вариант и не идти дальше и посмотреть в
 сторону того же [Ubuntu](https://ubuntu.com/download)(годный дистрибутив для начинающих в линукс).
 
-Нет? Ну ок, ты это сам выбрал, друг мой)))
-
 ## План действий.
- - Установка CLion.
- - Установка Github Desktop.
- - CLion. Начало работы.
- - Немного о сдаче лаб.
+ - **Установка CLion.**
+ - **Установка Github Desktop.**
+ - **CLion. Начало работы.**
+ - **Немного о сдаче лаб.**
  
 ### Как установить CLion и настроить Gtest
+
+Последняя команда может быть необязательной для выполнения каждый раз, но если что-то не работает, то её нужно выполнить.
 
 * Подать заявку на предоставление бесплатной лицензии [JetBrains Products for Learning](https://www.jetbrains.com/shop/eform/students)
 
@@ -61,6 +61,24 @@
 И выполняем эту команду.
 
 ```shell script
+git submodule update --init
+```
+
+#### **Для Linux** (Описано для Debian/Ubuntu и других систем, использующих apt)
+
+```shell script
+sudo apt update
+sudo apt install git
+git clone <ссылка на ваш репозиторий>
+```
+
+Где взять ссылку показано на картинке
+
+![Copy link](img/copyLink.png)
+
+```shell script
+cd <название репозитория>
+git checkout -b wp/lab
 git submodule update --init
 ```
 
@@ -337,4 +355,4 @@ int main() {
 Если что, обращайтесь к вашим менторам/волонтёрам/преподавателям. Вам обязательно помогут.
 За сим откланиваюсь. Спасибо за внимание.
 
-`Copyright 2020 aaaaaaaalesha`
+`Copyright 2020 aaaaaaaalesha & rkulagin`
