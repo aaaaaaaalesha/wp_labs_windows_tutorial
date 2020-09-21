@@ -21,6 +21,7 @@
  - Установка Github Desktop.
  - Установка CLion.
  - CLion. Начало работы.
+ - Немного о сдаче лаб.
  
 ### Ставим Github Desktop.
 
@@ -99,6 +100,198 @@ git submodule update --init
 
 ![open existing project](img/openExProject.png)
 
-* Готово. Если делаете всё в первый раз на данной машине, то стоит немного подождать, пока Hunter скачает и установит необходимые зависимости  
+* Готово. Если делаете всё в первый раз на данной машине, то стоит немного подождать, пока Hunter(специальный пакетный менеджер) скачает и установит необходимые зависимости.  
 
-### Начинаем работу.
+### Начинаем работу c CLion и лабками.
+
+Зачастую лабы суть лаб состоит в том, чтобы вы закодили то, что необходимо по заданию. 
+Делается это, как правило в директориях sourses/... - .cpp файлы и include/... - .hpp (подробнее на самих лабах)
+Не вдаваясь в подробности, после того как всё сделано, ваш код проходит так называемые unit-тесты. Если интересно их содержание
+можно посмотреть тут: /tests/test.cpp В общем и целом они нужны, чтобы подготовленные входные данные автоматически прогонялись через
+ваше решения, а выходные данные, в свою очередь, проверялись на правильность. Плохим тоном является выгружать лабу на проверку удалённому
+тестировщику TravisCI до того, как вы убедились, что тесты прошли локальную проверку у вас.
+
+Давайте разбёремся, как запускать тестики на вашей машине.
+
+Вот наше окно в CLion с какой-то открытой лабой.
+
+![](img/clion-main_window.png)
+
+Немного пробежимся по среде разработки.
+
+Слева мы наблюдаем всю файловую иерархию нашего проекта.
+
+Снизу поле для вывода. Туда выводятся всевозможные ошибки CMake, а также там
+мы будем видеть, как проходят наши тестики.
+
+Ну по центру место, где будем писать код, с подсветкой синтаксиса, автодополнениями
+и другим разработческим сахаром.
+
+Итак, внимание в правый верхний угол. Если сборка вашего проекта прошла успешно (при условии что вы выполнили все пункты выше),
+то у вас будет похожая картина.
+
+![](img/launch_tests.png)
+
+Для того, чтобы запустить тестирование, нажимаем на зелёный треугольничек, и смотрим в окно вывода:
+
+![](img/tests_output.png)
+
+Если вы видете подобное(`RUN   OK` и в конце `[  PASSED  ]`) - у вас всё прекрасно, тестики прошли успешно. 
+Однако в большинстве случаев первый вывод больше похож на что-то такое:
+
+```shell script
+Running main() from gtest_main.cc
+[==========] Running 11 tests from 1 test case.
+[----------] Global test environment set-up.
+[----------] 11 tests from Matrix
+[ RUN      ] Matrix.Init
+[       OK ] Matrix.Init (0 ms)
+[ RUN      ] Matrix.CopyAssign
+[       OK ] Matrix.CopyAssign (0 ms)
+[ RUN      ] Matrix.Add
+D:\GitHub\02-lab-03-matrix-aaaaaaaalesha\tests\matrix_unittests.cpp:48: Failure
+Expected equality of these values:
+  s.Rows()
+    Which is: 1
+  2
+[  FAILED  ] Matrix.Add (0 ms)
+[ RUN      ] Matrix.AddEmpty
+D:\GitHub\02-lab-03-matrix-aaaaaaaalesha\tests\matrix_unittests.cpp:65: Failure
+Expected equality of these values:
+  s.Rows()
+    Which is: 4294967295
+  0
+[  FAILED  ] Matrix.AddEmpty (0 ms)
+[ RUN      ] Matrix.Sub
+D:\GitHub\02-lab-03-matrix-aaaaaaaalesha\tests\matrix_unittests.cpp:79: Failure
+Expected equality of these values:
+  s.Rows()
+    Which is: 1
+  2
+[  FAILED  ] Matrix.Sub (0 ms)
+[ RUN      ] Matrix.SubEmpty
+D:\GitHub\02-lab-03-matrix-aaaaaaaalesha\tests\matrix_unittests.cpp:94: Failure
+Expected equality of these values:
+  s.Rows()
+    Which is: 4294967295
+  0
+[  FAILED  ] Matrix.SubEmpty (0 ms)
+[ RUN      ] Matrix.Mult
+D:\GitHub\02-lab-03-matrix-aaaaaaaalesha\tests\matrix_unittests.cpp:126: Failure
+Expected equality of these values:
+  s.Rows()
+    Which is: 2
+  3
+[  FAILED  ] Matrix.Mult (0 ms)
+[ RUN      ] Matrix.Transposition
+[       OK ] Matrix.Transposition (0 ms)
+[ RUN      ] Matrix.Minor
+[       OK ] Matrix.Minor (0 ms)
+[ RUN      ] Matrix.Det
+D:\GitHub\02-lab-03-matrix-aaaaaaaalesha\tests\matrix_unittests.cpp:234: Failure
+Expected equality of these values:
+  n.Det()
+    Which is: 0
+  343.
+    Which is: 343
+[  FAILED  ] Matrix.Det (1 ms)
+[ RUN      ] Matrix.Inverse
+[       OK ] Matrix.Inverse (0 ms)
+[----------] 11 tests from Matrix (8 ms total)
+
+[----------] Global test environment tear-down
+[==========] 11 tests from 1 test case ran. (9 ms total)
+[  PASSED  ] 5 tests.
+[  FAILED  ] 6 tests, listed below:
+[  FAILED  ] Matrix.Add
+[  FAILED  ] Matrix.AddEmpty
+[  FAILED  ] Matrix.Sub
+[  FAILED  ] Matrix.SubEmpty
+[  FAILED  ] Matrix.Mult
+[  FAILED  ] Matrix.Det
+
+ 6 FAILED TESTS
+
+Process finished with exit code 1
+```
+
+Тут тестики пытаются вам намекнуть, какой результат ожидался, а какой был выдан вашей 
+программой. Так что попытайтесь отдебажить ваш код - поставить точки остановки на 
+строчках, где временно хотите остановить программу и начать идти по ней "по шагам": 
+
+![](img/breakpoints.png)
+
+и нажмите на зелёного жучка в той же верхней области (справа от стрелочки).
+
+![](img/launch_tests.png)
+
+Видим, что мы вошли в режим дебаггера
+
+![](img/debugging1.png)
+
+далее можно поиграть с клавишами F8(step over) и F7(step into) - шаг с обходом и шаг
+с заходом соответственно. Внизу можем наблюдать локальные и глобалльные переменные и то,
+как они изменяются, пока мы шагаем по программе.
+
+![](img/debugging2.png)
+
+Процесс дебаггинга легко остановить нажатием на красный квадратик в той же верхней правой 
+строке.
+
+### Внесение изменений на удалённый репозиторий (сдача лабы)
+
+Как только все баги пофикшены нужно, чтобы они отправились на удалённый репозиторий.
+(чтобы ваши изменения были видны не только вам :D)
+
+Для этого входим в наш уже знакомый Github Desktop и видим, как он подхватил наши изменения:
+
+![](img/gh_desktop_changes.png)
+
+Однако помимо всего прочего в проект вшились `cmake-build-debug` и `.idea`. Там хранится всякая
+компиляционная канитель, логи и прочее. Нам это не нужно. Чтобы Github Desktop исключил
+этих ребят, нужно открыть файл `.gitignore`(он есть в каждой лабе) и там на любой строчке добавить их в список следующим образом:
+
+![](img/gitignore.png)
+
+Результат видим следующий: теперь всё ненужное идёт мимо, остались только наши изменения.
+
+![](img/gh_results.png)
+
+Осталось дать осмысленное описание нашему коммиту и отправить его в полёт на просторы github:
+
+![](img/commit.png)
+не забудьте нажать на push(внимание: убедитесь что вы делаете это на ветке `wp/lab`)
+![](img/push.png)
+
+Далее переходим на страницу с лабой в браузере, переключаемся на ветку `wp/lab`:
+
+![](img/switch_branch.png)
+
+Тут у вас появится подобная рыжая вкладочка с предложением создания pull request'a
+
+(что-то типо такого, картинку в интернетиках нашёл, не бейте)
+![](https://www.vogella.com/tutorials/GitHub/img/create-pull-request.png)
+
+Нажимаем `Compare & pull request`, даём ему имя `wp/lab` и продолжаем.
+
+Далее вашу лабу начнёт проверять Travis CI, он проверяет соответсвие clang формату, прогоняет
+на себе тестики, которые вы уже прогнали у себя локально и прочее.
+
+![](img/travis.png)
+
+Получив у него галочки по всем трём пунктам можно отсылать ссылку на pull request своему
+преподавателю. Дальше он будет вносить свои коррективы в ваш код.
+
+![](img/drewxa.png)
+
+## Заключение
+
+Я попытался написать поподробнее не только про саму работу на Шиндоус, но и общему 
+подходу к лабкам в принципе. Не сильно беспокойтесь, что сейчас всё это кажется таким
+сложным и муторным. Парочка итераций по алгоритму и вы сами просечёте, в чём фишка и
+будете делать это всё на автомате.
+
+Если что, обращайтесь к вашим менторам/волонтёрам/преподавателям. Вам обязательно помогут.
+За сим откланиваюсь. Спасибо за внимание.
+
+`Copyright 2020 aaaaaaaalesha`
