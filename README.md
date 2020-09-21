@@ -1,6 +1,8 @@
 ## Как начать делать лабы по АЯ. Windows.
 
 ### Введение.
+Данный туториал написан для студентов МГТУ им Н. Э. Баумана и в частности для ИУ8 ради облегчения их нелёгкого пути ~~по морям дискретной математики~~ в лабораторных работах по Алгоритмическим языкам.
+
 Перед тем, как мы начнём, хочу вас в последний раз предостеречь от выполнения лаб
 под виндой. Линукс - то, с чем вам всё равно придётся подружиться рано или поздно.
 И поверьте, на примере как своём, так и многих-многих тех, кто пытался что-то мудрить
@@ -16,57 +18,66 @@
 Нет? Ну ок, ты это сам выбрал, друг мой)))
 
 ## План действий.
- -[x] Установка Github Desktop.
- -[x] Установка CLion.
+ - Установка Github Desktop.
+ - Установка CLion.
+ - CLion. Начало работы.
  
-# Как установить CLion и настроить Gtest
+### Ставим Github Desktop.
 
-Disclaimer: данный туториал написан для студентов МГТУ им Н. Э. Баумана и в частности для ИУ8 ради облегчения их нелёгкого пути ~~по морям дискретной математики~~ в лабораторных работах по Алгоритмическим языкам
+Если вы мало знакомы с командами гита, то эта программа с графическим интерфейсом поможет вам на
+первом семестре. Чтобы клонировать репозитории и хранить их локально на своей машине, вносить изменения
+на удалённый репозиторий и так далее.
+
+* Качаем, устанавливаем [Github Desktop](https://desktop.github.com/)
+
+* Само собой логинимся через учётку github.
+
+* В Github Desktop: `File -> Clone repository` и выбираете нужный Вам репозиторий
+
+![Clone repository](img/cloneRepo.png)
+
+* ветка `master` - эталонная, своего рода шаблон для начала лабы. В неё мы не вносим изменения.
+Чтобы начать делать лабу, нам нужно создать свою ветку (обычно её называют `wp/lab`). Сделать это можно, нажав
+`New branch` в разделе с ветками. (смотри скрин ниже)
+
+* Изменить ветку на `wp/lab`
+
+![Change branch](img/branch.png)
+ 
+### Как установить CLion и настроить Gtest
 
 * Подать заявку на предоставление бесплатной лицензии [JetBrains Products for Learning](https://www.jetbrains.com/shop/eform/students)
 
-![Скриншот с сайта подачи заявки](https://github.com/RKulagin/Clion-GTest/blob/master/img/studentsLicence.png)
+![Скриншот с сайта подачи заявки](img/studentsLicence.png)
 
 (То, что подчёркнуто красным нужно заполнить)
 
 * Скачать [CLion](https://www.jetbrains.com/clion/)
 
-![Скриншот с сайта загрузки](https://github.com/RKulagin/Clion-GTest/blob/master/img/downloadCLion.png)
+![Скриншот с сайта загрузки](img/downloadCLion.png)
 
 * Установить CLion. 
 
 Установка стандартная, ничего дополнительно нажимать не требуется(только при желании это сделать)
 
 * Активировать CLion, используя университетскую почту
-
-
-**Для Windows или macOS**
-
-* Скачать [Github Desktop](https://desktop.github.com/) для Windows | macOS
-
-* В Github Desktop: `File -> Clone repository` и выбираете нужный Вам репозиторий
-
-![Clone repository](https://github.com/RKulagin/Clion-GTest/blob/master/img/cloneRepo.png)
-
-* Изменить ветку на `wp/lab`
-
-![Change branch](https://github.com/RKulagin/Clion-GTest/blob/master/img/branch.png)
+(P.S. если вы её до сих пор не получили, получите в ГЗ в 91 кабинете)
 
 * Далее нужно скачать [Python](https://www.python.org/downloads/) 
  
-![Download Python](https://github.com/RKulagin/Clion-GTest/blob/master/img/python.png)
+![Download Python](img/python.png)
  
 Установка стандартная, не требует дополнительных действий. Просто нажимаем далее, если спрашивают. Ничего не меняем
  
 * И [Git Bash](https://git-scm.com/download)
 
-![Download Git Bash](https://github.com/RKulagin/Clion-GTest/blob/master/img/gitBash.png)
+![Download Git Bash](img/gitBash.png)
 
 Установка стандартная, не требует дополнительных действий. Просто нажимаем далее, если спрашивают. Ничего не меняем
 
 Заходим в папку с клонированным репозиторием в проводнике. Кликаем ПКМ и выбираем Git Bash Here
 
-![Git Bash Here](https://github.com/RKulagin/Clion-GTest/blob/master/img/gitBashHere.png)
+![Git Bash Here](img/gitBashHere.png)
 
 И выполняем эту команду.
 
@@ -74,40 +85,20 @@ Disclaimer: данный туториал написан для студенто
 git submodule update --init
 ```
 
-**Для Linux** (Описано для Debian/Ubuntu и других систем, использующих apt)
-
-```shell script
-sudo apt update
-sudo apt install git
-git clone <ссылка на ваш репозиторий>
-```
-
-Где взять ссылку показано на картинке
-
-![Copy link](https://github.com/RKulagin/Clion-GTest/blob/master/img/copyLink.png)
-
-```shell script
-cd <название репозитория>
-git checkout -b wp/lab
-git submodule update --init
-```
-
-Последняя команда может быть необязательной для выполнения каждый раз, но если что-то не работает, то её нужно выполнить.
-
-**Далее для всех ОС**
-
 * Запускаем CLion
 
 * Выбираем пункт New CMake Project from Sources или `File -> New CMake Project from Sources`
 
-![New Project](https://github.com/RKulagin/Clion-GTest/blob/master/img/welcomeToClion.png)
+![New Project](img/welcomeToClion.png)
 
 * Выбираем папку с локальным репозиторием (обратите внимание, нужна именно папка, содержащая папку `.git`)
 
-![Choose local repository folder](https://github.com/RKulagin/Clion-GTest/blob/master/img/chooseLocalRepo.png)
+![Choose local repository folder](img/chooseLocalRepo.png)
 
 * Важно! Нажимаем Open Existing Project. Иначе CMakeLists.txt перезапишется
 
-![open existing project](https://github.com/RKulagin/Clion-GTest/blob/master/img/openExProject.png)
+![open existing project](img/openExProject.png)
 
 * Готово. Если делаете всё в первый раз на данной машине, то стоит немного подождать, пока Hunter скачает и установит необходимые зависимости  
+
+### Начинаем работу.
