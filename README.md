@@ -137,6 +137,26 @@ git submodule update --init
 
 ![](img/clion-main_window.png)
 
+Если вы видите ошибку
+
+```cmake
+CMake Error at CMakeLists.txt:14 (include):
+  include could not find load file:
+    tools/gate/cmake/HunterGate.cmake
+```
+
+значит у вас не установлены необходимые подмодули. Чтобы это исправить, скопируйте и вставьте эти команды в терминал / git bash находясь в корне локального репозитория
+
+```sh
+git submodule update --init
+```
+или
+
+```sh
+git submodule add https://github.com/cpp-pm/polly tools/polly
+git submodule add https://github.com/cpp-pm/gate tools/gate
+```
+
 Немного пробежимся по среде разработки.
 
 Слева мы наблюдаем всю файловую иерархию нашего проекта.
