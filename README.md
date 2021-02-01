@@ -25,7 +25,9 @@
 
 Последняя команда может быть необязательной для выполнения каждый раз, но если что-то не работает, то её нужно выполнить.
 
-* Подать заявку на предоставление бесплатной лицензии [JetBrains Products for Learning](https://www.jetbrains.com/shop/eform/students)
+* Подать заявку на предоставление бесплатной лицензии, используя университетскую почту (P.S. если вы её до сих пор не получили, получите в ГЗ в 91 кабинете)
+
+[JetBrains Products for Learning](https://www.jetbrains.com/shop/eform/students)
 
 ![Скриншот с сайта подачи заявки](img/studentsLicence.png)
 
@@ -39,8 +41,7 @@
 
 Установка стандартная, ничего дополнительно нажимать не требуется(только при желании это сделать)
 
-* Активировать CLion, используя университетскую почту
-(P.S. если вы её до сих пор не получили, получите в ГЗ в 91 кабинете)
+* Погдодовьте CLion к работе, настройте компилятор ([Tutorial](https://www.jetbrains.com/help/clion/quick-tutorial-on-configuring-clion-on-windows.html#GDB)). 
 
 * Далее нужно скачать [Python](https://www.python.org/downloads/) 
  
