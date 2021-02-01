@@ -1,4 +1,4 @@
-## Как начать делать лабы по АЯ. Windows.
+## Как начать делать лабы по АЯ. Windows (и не только).
 
 ### Введение.
 Данный туториал написан для студентов МГТУ им Н. Э. Баумана и в частности для ИУ8 ради облегчения их нелёгкого пути ~~по морям дискретной математики~~ в лабораторных работах по Алгоритмическим языкам.
@@ -287,12 +287,9 @@ Process finished with exit code 1
 ```c++
         #include <iostream>
 
-int  main( ) { std::cout << 
+int  main( ) {std::cout<<"Hello world!"         <<std::endl;
 
-
-"Hello world!"   << std::endl;
-
-return 0;}
+    return 0;}
 ```
 
 Понятно, что такой код читать неприятно, а убирать все пробельчики и табуляции ручками неудобно.
@@ -303,11 +300,10 @@ return 0;}
 #include <iostream>
 
 int main() {
-  std::cout << "Hello world!" << std::endl;
-  
-  return 0;
-}
+    std::cout << "Hello world!" << std::endl;
 
+    return 0;
+}
 ```
 
 Как это настроить:
